@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Catalog{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Catalog</h1>
+  <label class="search">
+    <span class="visually-hidden">Search the catalog</span>
+    <input id="book-search" type="search" placeholder="Search by title, author or genre" autocomplete="off">
+  </label>
+</div>
+
+<details class="add">
+  <summary>Add a book</summary>
+  <form id="book-form" class="form-grid">
+    <label>Title <input name="title" required></label>
+    <label>Author <input name="author" required></label>
+    <label>ISBN <input name="isbn" required></label>
+    <label>Genre <input name="genre"></label>
+    <label>Copies <input name="total_copies" type="number" min="1" value="1" required></label>
+    <button type="submit">Add to catalog</button>
+  </form>
+</details>
+
+<table class="ledger">
+  <thead><tr><th>ISBN</th><th>Title</th><th>Author</th><th>Genre</th><th>On shelf</th><th><span class="visually-hidden">Actions</span></th></tr></thead>
+  <tbody id="book-rows"></tbody>
+</table>
+<p class="empty" id="book-empty" hidden></p>
+
+<dialog id="checkout-dialog">
+  <form id="checkout-form" method="dialog">
+    <h2>Check out <span id="checkout-title"></span></h2>
+    <label>Patron <select name="user_id" id="checkout-user" required></select></label>
+    <div class="dialog-actions">
+      <button value="cancel" formnovalidate class="quiet">Cancel</button>
+      <button value="confirm">Check out</button>
+    </div>
+  </form>
+</dialog>
+{% endblock %}

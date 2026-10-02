@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Loans{% endblock %}
+{% block content %}
+<div class="page-head"><h1>Loans</h1></div>
+
+<section id="overdue" class="overdue" hidden>
+  <h2>Overdue</h2>
+  <table class="ledger">
+    <thead><tr><th>Book</th><th>Patron</th><th>Due</th><th>Late by</th><th><span class="visually-hidden">Actions</span></th></tr></thead>
+    <tbody id="overdue-rows"></tbody>
+  </table>
+</section>
+
+<div class="tabs" role="group" aria-label="Filter loans">
+  <button data-status="active" aria-pressed="true">On loan</button>
+  <button data-status="returned" aria-pressed="false">Returned</button>
+  <button data-status="" aria-pressed="false">All</button>
+</div>
+
+<table class="ledger">
+  <thead><tr><th>Book</th><th>Patron</th><th>Checked out</th><th>Due</th><th><span class="visually-hidden">Actions</span></th></tr></thead>
+  <tbody id="loan-rows"></tbody>
+</table>
+<p class="empty" id="loan-empty" hidden>No loans here.</p>
+{% endblock %}

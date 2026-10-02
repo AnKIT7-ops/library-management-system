@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Patrons{% endblock %}
+{% block content %}
+<div class="page-head"><h1>Patrons</h1></div>
+
+<details class="add">
+  <summary>Register a patron</summary>
+  <form id="user-form" class="form-grid">
+    <label>Name <input name="name" required></label>
+    <label>Email <input name="email" type="email" required></label>
+    <button type="submit">Register patron</button>
+  </form>
+</details>
+
+<table class="ledger">
+  <thead><tr><th>Name</th><th>Email</th><th>Joined</th><th><span class="visually-hidden">Actions</span></th></tr></thead>
+  <tbody id="user-rows"></tbody>
+</table>
+<p class="empty" id="user-empty" hidden>No patrons yet. Register the first one above.</p>
+{% endblock %}

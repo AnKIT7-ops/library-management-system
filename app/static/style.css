@@ -1,0 +1,253 @@
+:root {
+  --paper: #eef2ee;      /* cool card stock */
+  --card: #fbfcfa;
+  --ink: #1d2433;        /* navy-black type */
+  --muted: #5d6676;
+  --rule: #c9d2cb;
+  --stamp: #2b4fa8;      /* date-due stamp blue */
+  --late: #c2362b;       /* overdue stamp red */
+  --display: "Familjen Grotesk", system-ui, sans-serif;
+  --body: "Public Sans", system-ui, sans-serif;
+  --type: "Courier Prime", ui-monospace, monospace;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #141922;
+    --card: #1b2130;
+    --ink: #e4e8ef;
+    --muted: #97a0b0;
+    --rule: #2e3647;
+    --stamp: #7e9cf0;
+    --late: #f07a6e;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 15px/1.5 var(--body);
+}
+
+a { color: inherit; }
+
+:focus-visible { outline: 2px solid var(--stamp); outline-offset: 2px; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ---------- chrome ---------- */
+
+.overdue-bar {
+  display: block;
+  padding: 8px 16px;
+  background: var(--late);
+  color: var(--paper);
+  font: 700 13px/1.4 var(--type);
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.overdue-bar[hidden] { display: none; }
+
+.masthead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px 32px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 28px 16px 0;
+}
+
+.brand {
+  font: 700 20px/1 var(--display);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.masthead nav { display: flex; gap: 4px; }
+
+/* Nav tabs read like the brass label frames on card-catalog drawers. */
+.masthead nav a {
+  padding: 5px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  font: 400 13px/1.4 var(--type);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.masthead nav a:hover { color: var(--ink); border-color: var(--ink); }
+.masthead nav a[aria-current="page"] { color: var(--ink); border-color: var(--ink); background: var(--card); }
+
+main { max-width: 1080px; margin: 0 auto; padding: 0 16px 64px; }
+
+.page-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 40px 0 20px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--ink);
+}
+
+h1 {
+  margin: 0;
+  font: 700 clamp(34px, 6vw, 52px)/1 var(--display);
+  letter-spacing: -0.03em;
+}
+
+h2 { font: 700 20px/1.2 var(--display); margin: 0 0 12px; }
+
+/* ---------- controls ---------- */
+
+input, select, button { font: inherit; color: inherit; }
+
+input, select {
+  width: 100%;
+  padding: 8px 10px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+}
+input:focus, select:focus { border-color: var(--stamp); }
+
+button {
+  padding: 8px 14px;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+button:hover { background: var(--stamp); border-color: var(--stamp); }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+button.quiet, .ledger button { background: transparent; color: var(--ink); border-color: var(--rule); }
+button.quiet:hover, .ledger button:hover { border-color: var(--ink); background: transparent; }
+.ledger button.danger { color: var(--late); border-color: var(--late); }
+
+.search { flex: 1 1 280px; max-width: 420px; }
+.search input { padding: 10px 12px; font-size: 16px; }
+
+details.add { margin-bottom: 24px; }
+details.add summary {
+  cursor: pointer;
+  font: 700 13px/1.4 var(--type);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--stamp);
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+  align-items: end;
+  margin-top: 14px;
+  padding: 16px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+}
+.form-grid label, dialog label { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+
+.tabs { display: flex; gap: 4px; margin-bottom: 12px; }
+.tabs button { background: transparent; color: var(--muted); border-color: var(--rule); }
+.tabs button[aria-pressed="true"] { color: var(--ink); border-color: var(--ink); background: var(--card); }
+
+/* ---------- tables ---------- */
+
+.ledger { width: 100%; border-collapse: collapse; }
+.ledger th {
+  padding: 8px 10px;
+  text-align: left;
+  font: 400 12px/1.4 var(--type);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--rule);
+}
+.ledger td { padding: 12px 10px; border-bottom: 1px solid var(--rule); vertical-align: middle; }
+.ledger td:last-child { text-align: right; }
+.ledger .title { font-weight: 600; }
+.mono { font-family: var(--type); font-size: 14px; color: var(--muted); }
+
+.shelf { font-family: var(--type); }
+.shelf.out { color: var(--late); }
+
+.empty { padding: 32px 0; color: var(--muted); text-align: center; }
+
+/* Signature: due dates as rubber date-due stamps. */
+.stamp {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 2px solid currentColor;
+  border-radius: 3px;
+  color: var(--stamp);
+  font: 700 13px/1.3 var(--type);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+}
+.stamp.late { color: var(--late); transform: rotate(1.5deg); }
+.stamp.done { color: var(--muted); border-style: dashed; transform: none; }
+@media (prefers-color-scheme: dark) { .stamp { mix-blend-mode: normal; } }
+
+.overdue { margin-bottom: 40px; padding: 16px; border: 2px solid var(--late); border-radius: 6px; }
+.overdue h2 { color: var(--late); }
+.overdue[hidden] { display: none; }
+
+/* ---------- dialog + toast ---------- */
+
+dialog {
+  width: min(420px, calc(100vw - 32px));
+  padding: 24px;
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+}
+dialog::backdrop { background: rgb(20 25 34 / 0.45); }
+.dialog-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px; }
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translate(-50%, 16px);
+  padding: 10px 16px;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+.toast.error { background: var(--late); color: var(--paper); }
+
+@media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+
+/* ---------- small screens: rows become stacked cards ---------- */
+
+@media (max-width: 680px) {
+  .ledger thead { display: none; }
+  .ledger tr { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+  .ledger td { padding: 0; border: 0; }
+  .ledger td:last-child { grid-column: 2; grid-row: 1 / span 3; align-self: center; }
+}

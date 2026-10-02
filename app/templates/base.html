@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %} · Circulation desk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Familjen+Grotesk:wght@500;700&family=Public+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body data-page="{{ page }}">
+  <a class="overdue-bar" id="overdue-bar" href="{{ url_for('views.transactions') }}#overdue" hidden></a>
+  <header class="masthead">
+    <a class="brand" href="{{ url_for('views.books') }}">Circulation desk</a>
+    <nav aria-label="Sections">
+      <a href="{{ url_for('views.books') }}" {% if page == 'books' %}aria-current="page"{% endif %}>Catalog</a>
+      <a href="{{ url_for('views.users') }}" {% if page == 'users' %}aria-current="page"{% endif %}>Patrons</a>
+      <a href="{{ url_for('views.transactions') }}" {% if page == 'transactions' %}aria-current="page"{% endif %}>Loans</a>
+    </nav>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
